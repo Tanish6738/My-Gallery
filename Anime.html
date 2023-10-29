@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Gallery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <h1 class="logo">Image Gallery</h1>
+      <ul class="nav-list">
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#">Wallpaper</a></li>
+        <li><a href="#">Anime</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <div id="button">
+  <button onclick="runLoop('jpg')">JPG format Images</button>
+  <button onclick="runLoop('png')">PNG format Images</button>
+  <button onclick="runLoop('webp')">WEBP format Images</button>
+  </div>
+  <div id="image-gallery">
+    <!-- Thumbnails will be added dynamically using JavaScript -->
+  </div>
+
+  <div id="modal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modal-image">
+  </div>
+
+  
+
+  <script>
+    const imageGallery = document.getElementById("image-gallery");
+
+    // Function to clear the existing thumbnails
+    function clearGallery() {
+      imageGallery.innerHTML = '';
+    }
+
+    // Function to run the selected loop
+    function runLoop(loopType) {
+      clearGallery(); // Clear the existing thumbnails
+
+      if (loopType === 'jpg') {
+        for (let i = 0; i < 17; i++) {
+          const imageUrl = "Images/Ai Anime/Ag jpg/AG (" + (i + 1) + ").jpg";
+          const index = i + 1;
+          addThumbnail(imageUrl, index);
+        }
+      } else if (loopType === 'png') {
+        for (let i = 0; i < 87; i++) {
+          const imageUrl = "Images/Ai Anime/Ag png/AG (" + (i + 1) + ").png";
+          const index = i + 1;
+          addThumbnail(imageUrl, index);
+        }
+      } else if (loopType === 'webp') {
+        for (let i = 0; i < 16; i++) {
+          const imageUrl = "Images/Ai Anime/Ag webp/AG (" + (i + 1) + ").webp";
+          const index = i + 1;
+          addThumbnail(imageUrl, index);
+        }
+      }
+    }
+
+    // Function to add a thumbnail to the image gallery
+    function addThumbnail(imageUrl, index) {
+      const thumbnail = document.createElement("div");
+      thumbnail.className = "thumbnail";
+
+      const img = document.createElement("img");
+      img.src = imageUrl;
+      img.alt = `Image ${index}`;
+      img.onclick = () => openModal(imageUrl);
+
+      thumbnail.appendChild(img);
+      imageGallery.appendChild(thumbnail);
+    }
+
+    // Add a function to display the image in its original size
+    function openModal(imageSrc) {
+      const modal = document.getElementById("modal");
+      const modalImage = document.getElementById("modal-image");
+      modalImage.src = imageSrc;
+      modal.style.display = "block";
+      modalImage.style.maxWidth = "none";
+      modalImage.style.maxHeight = "none";
+    }
+
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+  </script>
+</body>
+</html>
